@@ -542,6 +542,11 @@ public final class HuobiExchangeAdapter extends AbstractExchangeAdapter implemen
     }
 
     @Override
+    public <T extends Ticker> T getTicker(String marketId) throws ExchangeNetworkException, TradingApiException {
+        return null;
+    }
+
+    @Override
     public BigDecimal getPercentageOfBuyOrderTakenForExchangeFee(String marketId) throws TradingApiException,
             ExchangeNetworkException {
 

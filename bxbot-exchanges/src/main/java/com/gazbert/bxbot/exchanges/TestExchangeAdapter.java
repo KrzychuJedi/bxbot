@@ -166,6 +166,22 @@ public final class TestExchangeAdapter extends AbstractExchangeAdapter implement
     }
 
     @Override
+    public BitstampTicker getTicker(String marketId) throws ExchangeNetworkException, TradingApiException {
+        try {
+            final ExchangeHttpResponse response = sendPublicRequestToExchange("ticker/" + marketId);
+            LOG.debug(() -> "Latest Market Price response: " + response);
+
+            return gson.fromJson(response.getPayload(), BitstampTicker.class);
+
+        } catch (ExchangeNetworkException | TradingApiException e) {
+            throw e;
+        } catch (Exception e) {
+            LOG.error(UNEXPECTED_ERROR_MSG, e);
+            throw new TradingApiException(UNEXPECTED_ERROR_MSG, e);
+        }
+    }
+
+    @Override
     public BalanceInfo getBalanceInfo() throws TradingApiException, ExchangeNetworkException {
 
         final Map<String, BigDecimal> balancesAvailable = new HashMap<>();
@@ -243,7 +259,7 @@ public final class TestExchangeAdapter extends AbstractExchangeAdapter implement
     /**
      * GSON class for a Bitstamp ticker response.
      */
-    private static class BitstampTicker {
+    private static class BitstampTicker implements Ticker {
 
         public BigDecimal high;
         public BigDecimal last;
@@ -266,6 +282,78 @@ public final class TestExchangeAdapter extends AbstractExchangeAdapter implement
                     .add("low", low)
                     .add("ask", ask)
                     .toString();
+        }
+
+        @Override
+        public BigDecimal getHigh() {
+            return high;
+        }
+
+        @Override
+        public void setHigh(BigDecimal high) {
+            this.high = high;
+        }
+
+        public long getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(long timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public BigDecimal getBid() {
+            return bid;
+        }
+
+        public void setBid(BigDecimal bid) {
+            this.bid = bid;
+        }
+
+        public BigDecimal getVwap() {
+            return vwap;
+        }
+
+        public void setVwap(BigDecimal vwap) {
+            this.vwap = vwap;
+        }
+
+        @Override
+        public BigDecimal getVolume() {
+            return volume;
+        }
+
+        @Override
+        public void setVolume(BigDecimal volume) {
+            this.volume = volume;
+        }
+
+        @Override
+        public BigDecimal getLastPrice() {
+            return last;
+        }
+
+        @Override
+        public void setLastPrice(BigDecimal lastPrice) {
+            this.last = lastPrice;
+        }
+
+        @Override
+        public BigDecimal getLow() {
+            return low;
+        }
+
+        @Override
+        public void setLow(BigDecimal low) {
+            this.low = low;
+        }
+
+        public BigDecimal getAsk() {
+            return ask;
+        }
+
+        public void setAsk(BigDecimal ask) {
+            this.ask = ask;
         }
     }
 

@@ -30,6 +30,7 @@ import com.gazbert.bxbot.trading.api.*;
 import com.google.common.base.MoreObjects;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -363,7 +364,23 @@ public final class BitfinexExchangeAdapter extends AbstractExchangeAdapter imple
             LOG.debug(() -> "Latest Market Price response: " + response);
 
             final BitfinexTicker ticker = gson.fromJson(response.getPayload(), BitfinexTicker.class);
-            return ticker.last_price;
+            return ticker.lastPrice;
+
+        } catch (ExchangeNetworkException | TradingApiException e) {
+            throw e;
+        } catch (Exception e) {
+            LOG.error(UNEXPECTED_ERROR_MSG, e);
+            throw new TradingApiException(UNEXPECTED_ERROR_MSG, e);
+        }
+    }
+
+    @Override
+    public BitfinexTicker getTicker(String marketId) throws ExchangeNetworkException, TradingApiException {
+        try {
+            final ExchangeHttpResponse response = sendPublicRequestToExchange("pubticker/" + marketId);
+            LOG.debug(() -> "Latest Market Price response: " + response);
+
+            return gson.fromJson(response.getPayload(), BitfinexTicker.class);
 
         } catch (ExchangeNetworkException | TradingApiException e) {
             throw e;
@@ -558,16 +575,17 @@ public final class BitfinexExchangeAdapter extends AbstractExchangeAdapter imple
     /**
      * GSON class for a Bitfinex 'pubticker' API call response.
      */
-    private static class BitfinexTicker {
+    private static class BitfinexTicker implements Ticker {
 
-        public BigDecimal mid;
-        public BigDecimal bid;
-        public BigDecimal ask;
-        public BigDecimal last_price;
-        public BigDecimal low;
-        public BigDecimal high;
-        public BigDecimal volume;
-        public String timestamp;
+        private BigDecimal mid;
+        private BigDecimal bid;
+        private BigDecimal ask;
+        @SerializedName("last_price")
+        private BigDecimal lastPrice;
+        private BigDecimal low;
+        private BigDecimal high;
+        private BigDecimal volume;
+        private String timestamp;
 
         @Override
         public String toString() {
@@ -575,12 +593,83 @@ public final class BitfinexExchangeAdapter extends AbstractExchangeAdapter imple
                     .add("mid", mid)
                     .add("bid", bid)
                     .add("ask", ask)
-                    .add("last_price", last_price)
+                    .add("lastPrice", lastPrice)
                     .add("low", low)
                     .add("high", high)
                     .add("volume", volume)
                     .add("timestamp", timestamp)
                     .toString();
+        }
+
+        public BigDecimal getMid() {
+            return mid;
+        }
+
+        public void setMid(BigDecimal mid) {
+            this.mid = mid;
+        }
+
+        public BigDecimal getBid() {
+            return bid;
+        }
+
+        public void setBid(BigDecimal bid) {
+            this.bid = bid;
+        }
+
+        public BigDecimal getAsk() {
+            return ask;
+        }
+
+        public void setAsk(BigDecimal ask) {
+            this.ask = ask;
+        }
+
+        @Override
+        public BigDecimal getLastPrice(){
+            return lastPrice;
+        }
+
+        public void setLastPrice(BigDecimal lastPrice){
+            this.lastPrice = lastPrice;
+        }
+
+        @Override
+        public BigDecimal getLow() {
+            return low;
+        }
+
+        @Override
+        public void setLow(BigDecimal low) {
+            this.low = low;
+        }
+
+        @Override
+        public BigDecimal getHigh() {
+            return high;
+        }
+
+        @Override
+        public void setHigh(BigDecimal high) {
+            this.high = high;
+        }
+
+        @Override
+        public BigDecimal getVolume() {
+            return volume;
+        }
+
+        @Override
+        public void setVolume(BigDecimal volume) {
+            this.volume = volume;
+        }
+
+        public String getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(String timestamp) {
+            this.timestamp = timestamp;
         }
     }
 

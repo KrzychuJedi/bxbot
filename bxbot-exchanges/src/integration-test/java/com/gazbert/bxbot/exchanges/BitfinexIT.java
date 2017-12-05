@@ -53,12 +53,11 @@ import static org.junit.Assert.*;
  * @author gazbert
  */
 @RunWith(PowerMockRunner.class)
-@PowerMockIgnore({"javax.crypto.*"})
+@PowerMockIgnore({"javax.crypto.*","javax.management.*"})
 @PrepareForTest(BitfinexExchangeAdapter.class)
-public class BitfinexIT {
+public class BitfinexIT extends AbstractTest {
 
     // Canned test data
-    private static final String MARKET_ID = "btcusd";
     private static final BigDecimal SELL_ORDER_PRICE = new BigDecimal("10000.176");
     private static final BigDecimal SELL_ORDER_QUANTITY = new BigDecimal("0.01");
 
@@ -69,10 +68,8 @@ public class BitfinexIT {
     private static final List<String> nonFatalNetworkErrorMessages = Arrays.asList(
             "Connection refused", "Connection reset", "Remote host closed connection during handshake");
 
-    private ExchangeConfig exchangeConfig;
     private AuthenticationConfig authenticationConfig;
     private NetworkConfig networkConfig;
-
 
     /*
      * Create some exchange config - the TradingEngine would normally do this.

@@ -150,6 +150,24 @@ public interface TradingApi {
     BigDecimal getLatestMarketPrice(String marketId) throws ExchangeNetworkException, TradingApiException;
 
     /**
+     * Fetches ticker for a given market
+     *
+     * @param <T> class extending {@link Ticker}. Due exchanges can return different information ticker can be customized
+     *           for each adapter
+     * @param marketId the id of the market.
+     * @return the latest ticker
+     * @throws ExchangeNetworkException if a network error occurred trying to connect to the exchange. This is
+     *                                  implementation specific for each Exchange Adapter - see the documentation for the
+     *                                  adapter you are using. You could retry the API call, or exit from your Trading Strategy
+     *                                  and let the Trading Engine execute your Trading Strategy at the next trade cycle.
+     * @throws TradingApiException      if the API call failed for any reason other than a network error. This means something
+     *                                  bad as happened; you would probably want to wrap this exception in a
+     *                                  StrategyException and let the Trading Engine shutdown the bot immediately
+     *                                  to prevent unexpected losses.
+     */
+    <T extends Ticker> T getTicker(String marketId) throws ExchangeNetworkException, TradingApiException;
+
+    /**
      * Fetches the balance of your wallets on the exchange.
      *
      * @return your wallet balance info.

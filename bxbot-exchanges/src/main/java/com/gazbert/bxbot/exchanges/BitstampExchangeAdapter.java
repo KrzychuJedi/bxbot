@@ -359,6 +359,11 @@ public final class BitstampExchangeAdapter extends AbstractExchangeAdapter imple
     }
 
     @Override
+    public <T extends Ticker> T getTicker(String marketId) throws ExchangeNetworkException, TradingApiException {
+        return null;
+    }
+
+    @Override
     public BalanceInfo getBalanceInfo() throws TradingApiException, ExchangeNetworkException {
 
         try {
@@ -573,7 +578,7 @@ public final class BitstampExchangeAdapter extends AbstractExchangeAdapter imple
     /**
      * GSON class for a Bitstamp ticker response.
      */
-    private static class BitstampTicker {
+    private static class BitstampTicker implements Ticker {
 
         public BigDecimal high;
         public BigDecimal last;
@@ -596,6 +601,78 @@ public final class BitstampExchangeAdapter extends AbstractExchangeAdapter imple
                     .add("low", low)
                     .add("ask", ask)
                     .toString();
+        }
+
+        @Override
+        public BigDecimal getHigh() {
+            return high;
+        }
+
+        @Override
+        public void setHigh(BigDecimal high) {
+            this.high = high;
+        }
+
+        public long getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(long timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public BigDecimal getBid() {
+            return bid;
+        }
+
+        public void setBid(BigDecimal bid) {
+            this.bid = bid;
+        }
+
+        public BigDecimal getVwap() {
+            return vwap;
+        }
+
+        public void setVwap(BigDecimal vwap) {
+            this.vwap = vwap;
+        }
+
+        @Override
+        public BigDecimal getVolume() {
+            return volume;
+        }
+
+        @Override
+        public void setVolume(BigDecimal volume) {
+            this.volume = volume;
+        }
+
+        @Override
+        public BigDecimal getLastPrice() {
+            return last;
+        }
+
+        @Override
+        public void setLastPrice(BigDecimal lastPrice) {
+            this.last = lastPrice;
+        }
+
+        @Override
+        public BigDecimal getLow() {
+            return low;
+        }
+
+        @Override
+        public void setLow(BigDecimal low) {
+            this.low = low;
+        }
+
+        public BigDecimal getAsk() {
+            return ask;
+        }
+
+        public void setAsk(BigDecimal ask) {
+            this.ask = ask;
         }
     }
 

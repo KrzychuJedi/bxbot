@@ -396,6 +396,11 @@ public final class OkCoinExchangeAdapter extends AbstractExchangeAdapter impleme
     }
 
     @Override
+    public <T extends Ticker> T getTicker(String marketId) throws ExchangeNetworkException, TradingApiException {
+        return null;
+    }
+
+    @Override
     public BalanceInfo getBalanceInfo() throws TradingApiException, ExchangeNetworkException {
 
         try {

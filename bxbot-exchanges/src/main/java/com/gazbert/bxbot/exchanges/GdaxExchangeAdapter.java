@@ -463,6 +463,11 @@ public final class GdaxExchangeAdapter extends AbstractExchangeAdapter implement
     }
 
     @Override
+    public <T extends Ticker> T getTicker(String marketId) throws ExchangeNetworkException, TradingApiException {
+        return null;
+    }
+
+    @Override
     public BigDecimal getPercentageOfBuyOrderTakenForExchangeFee(String marketId) throws TradingApiException,
             ExchangeNetworkException {
 
@@ -563,12 +568,17 @@ public final class GdaxExchangeAdapter extends AbstractExchangeAdapter implement
     /**
      * GSON class for GDAX '/products/{marketId}/ticker' API call response.
      */
-    private static class GdaxTicker {
+    private static class GdaxTicker  {
 
         public long trade_id;
         public BigDecimal price;
         public BigDecimal size;
+        public BigDecimal bid;
+        public BigDecimal ask;
+        public BigDecimal volume;
         public String time; // e.g. "2015-10-14T19:19:36.604735Z"
+
+
 
         @Override
         public String toString() {

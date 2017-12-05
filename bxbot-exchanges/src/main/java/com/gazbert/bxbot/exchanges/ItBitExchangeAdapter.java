@@ -550,6 +550,11 @@ public final class ItBitExchangeAdapter extends AbstractExchangeAdapter implemen
     }
 
     @Override
+    public <T extends Ticker> T getTicker(String marketId) throws ExchangeNetworkException, TradingApiException {
+        return null;
+    }
+
+    @Override
     public BalanceInfo getBalanceInfo() throws TradingApiException, ExchangeNetworkException {
 
         ExchangeHttpResponse response = null;
