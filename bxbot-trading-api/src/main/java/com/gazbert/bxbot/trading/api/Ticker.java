@@ -6,17 +6,17 @@ public interface Ticker {
 
     BigDecimal getLastPrice();
 
-    public void setLastPrice(BigDecimal lastPrice);
+    void setLastPrice(BigDecimal lastPrice);
 
-    public BigDecimal getLow();
+    BigDecimal getLow();
 
-    public void setLow(BigDecimal low);
+    void setLow(BigDecimal low);
 
-    public BigDecimal getHigh();
+    BigDecimal getHigh();
 
-    public void setHigh(BigDecimal high);
+    void setHigh(BigDecimal high);
 
-    public BigDecimal getVolume();
+    BigDecimal getVolume();
 
-    public void setVolume(BigDecimal volume);
+    void setVolume(BigDecimal volume);
 }
