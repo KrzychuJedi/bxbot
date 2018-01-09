@@ -23,7 +23,10 @@
 
 package com.gazbert.bxbot.trading.api;
 
+import com.gazbert.bxbot.domain.trading.Ticker;
+
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -280,5 +283,9 @@ public interface TradingApi {
                 return null;
             }
         };
+    }
+
+    default List<Ticker> findHistoryData(String marketId){
+        return Collections.<Ticker>emptyList();
     }
 }

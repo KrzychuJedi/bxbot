@@ -23,6 +23,7 @@
 
 package com.gazbert.bxbot.exchanges;
 
+import com.gazbert.bxbot.domain.trading.Ticker;
 import com.gazbert.bxbot.exchange.api.*;
 import com.gazbert.bxbot.trading.api.*;
 import org.junit.Before;

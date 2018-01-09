@@ -23,12 +23,13 @@
 
 package com.gazbert.bxbot.exchanges;
 
+import com.gazbert.bxbot.domain.trading.Ticker;
 import com.gazbert.bxbot.exchange.api.ExchangeAdapter;
 import com.gazbert.bxbot.exchange.api.ExchangeConfig;
 import com.gazbert.bxbot.exchanges.trading.api.impl.BalanceInfoImpl;
 import com.gazbert.bxbot.exchanges.trading.api.impl.MarketOrderBookImpl;
 import com.gazbert.bxbot.exchanges.trading.api.impl.MarketOrderImpl;
-import com.gazbert.bxbot.exchanges.trading.api.impl.TickerImpl;
+import com.gazbert.bxbot.domain.trading.TickerImpl;
 import com.gazbert.bxbot.trading.api.*;
 import com.google.common.base.MoreObjects;
 import com.google.gson.*;

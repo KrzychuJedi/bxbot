@@ -29,7 +29,7 @@ import com.gazbert.bxbot.exchange.api.ExchangeConfig;
 import com.gazbert.bxbot.exchange.api.NetworkConfig;
 import com.gazbert.bxbot.trading.api.BalanceInfo;
 import com.gazbert.bxbot.trading.api.MarketOrderBook;
-import com.gazbert.bxbot.trading.api.Ticker;
+import com.gazbert.bxbot.domain.trading.Ticker;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -12,7 +12,7 @@
  *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
  * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
@@ -21,11 +21,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.gazbert.bxbot.exchanges.trading.api.impl;
+package com.gazbert.bxbot.domain.trading;
 
-import com.gazbert.bxbot.trading.api.Ticker;
 import com.google.common.base.MoreObjects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 /**
@@ -33,21 +36,40 @@ import java.math.BigDecimal;
  *
  * @author gazbert
  */
+@Entity
+@Table(name = "ticker")
 public final class TickerImpl implements Ticker {
 
+    @Column(scale = 8, precision = 19)
     private BigDecimal last;
+
+    @Column(scale = 8, precision = 19)
     private BigDecimal bid;
+
+    @Column(scale = 8, precision = 19)
     private BigDecimal ask;
+
+    @Column(scale = 8, precision = 19)
     private BigDecimal low;
+
+    @Column(scale = 8, precision = 19)
     private BigDecimal high;
+
+    @Column(scale = 8, precision = 19)
     private BigDecimal open;
+
+    @Column(scale = 8, precision = 19)
     private BigDecimal volume;
+
+    @Column(scale = 8, precision = 19)
     private BigDecimal vwap;
+
+    @Id
     private Long timestamp;
 
 
     public TickerImpl(BigDecimal last, BigDecimal bid, BigDecimal ask, BigDecimal low, BigDecimal high,
-               BigDecimal open, BigDecimal volume, BigDecimal vwap, Long timestamp) {
+                      BigDecimal open, BigDecimal volume, BigDecimal vwap, Long timestamp) {
         this.last = last;
         this.bid = bid;
         this.ask = ask;

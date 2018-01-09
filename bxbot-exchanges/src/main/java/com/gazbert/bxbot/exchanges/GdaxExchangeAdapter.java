@@ -23,6 +23,8 @@
 
 package com.gazbert.bxbot.exchanges;
 
+import com.gazbert.bxbot.domain.trading.Ticker;
+import com.gazbert.bxbot.domain.trading.TickerImpl;
 import com.gazbert.bxbot.exchange.api.AuthenticationConfig;
 import com.gazbert.bxbot.exchange.api.ExchangeAdapter;
 import com.gazbert.bxbot.exchange.api.ExchangeConfig;

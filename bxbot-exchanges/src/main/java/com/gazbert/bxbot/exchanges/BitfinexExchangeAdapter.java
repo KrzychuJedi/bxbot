@@ -23,6 +23,8 @@
 
 package com.gazbert.bxbot.exchanges;
 
+import com.gazbert.bxbot.domain.trading.Ticker;
+import com.gazbert.bxbot.domain.trading.TickerImpl;
 import com.gazbert.bxbot.exchange.api.AuthenticationConfig;
 import com.gazbert.bxbot.exchange.api.ExchangeAdapter;
 import com.gazbert.bxbot.exchange.api.ExchangeConfig;
@@ -33,6 +35,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -84,6 +87,7 @@ import java.util.*;
  * @author gazbert
  * @since 1.0
  */
+@Service
 public final class BitfinexExchangeAdapter extends AbstractExchangeAdapter implements ExchangeAdapter {
 
     private static final Logger LOG = LogManager.getLogger();

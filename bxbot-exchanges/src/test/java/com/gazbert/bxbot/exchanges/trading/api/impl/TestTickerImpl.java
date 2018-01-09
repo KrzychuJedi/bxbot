@@ -23,6 +23,7 @@
 
 package com.gazbert.bxbot.exchanges.trading.api.impl;
 
+import com.gazbert.bxbot.domain.trading.TickerImpl;
 import org.junit.Test;
 
 import java.math.BigDecimal;
